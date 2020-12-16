@@ -3,10 +3,38 @@ import {useFormik} from 'formik';
 import styled from 'styled-components';
 
 
-const From = styled.form`
-  background: red;
-text-align: center;
+const From = styled.form` 
+    padding: 1%;
+    max-width: 500px;
+    margin: auto;
+    background: #2b598c;
+
 `;
+
+const Div = styled.div`
+    margin: 1%;
+`;
+
+const Label = styled.label`
+   margin:0 2% 0 0;
+   color:#ffff
+`;
+
+const Input = styled.input`
+    border: 1px solid #bbb;
+    border-radius: 5px;
+    height: 30px;
+    width:90%
+`;
+
+const ErrorLabel = styled.div`
+color:red;
+`;
+
+const DivButton = styled.div`
+
+`;
+
 
 const validate = values => {
     const errors = {};
@@ -44,56 +72,63 @@ export default function MemberCreate() {
         },
     });
     return (
-            <From onSubmit={formik.handleSubmit}>
+        <From onSubmit={formik.handleSubmit}>
+            <Div>
                 <div>
-                    <label htmlFor="firstName">First Name</label>
-                    <input
-                        id="firstName"
-                        name="firstName"
-                        type="text"
-                        onChange={formik.handleChange}
-                        onBlur={formik.handleBlur}
-                        value={formik.values.firstName}
-                    />
+                    <Label htmlFor="firstName">First Name</Label>
                 </div>
+                <Input
+                    id="firstName"
+                    name="firstName"
+                    type="text"
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    value={formik.values.firstName}
+                />
+            </Div>
+            <Div>
+                {formik.touched.firstName && formik.errors.firstName ? (
+                    <ErrorLabel>{formik.errors.firstName}</ErrorLabel>
+                ) : null}
+            </Div>
+            <Div>
                 <div>
-                    {formik.touched.firstName && formik.errors.firstName ? (
-                        <div>{formik.errors.firstName}</div>
-                    ) : null}
+                    <Label htmlFor="lastName">Last Name</Label>
                 </div>
+                <Input
+                    id="lastName"
+                    name="lastName"
+                    type="text"
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    value={formik.values.lastName}
+                />
+            </Div>
+            <Div>
+                {formik.touched.lastName && formik.errors.lastName ? (
+                    <ErrorLabel>{formik.errors.lastName}</ErrorLabel>
+                ) : null}
+            </Div>
+            <Div>
                 <div>
-                    <label htmlFor="lastName">Last Name</label>
-                    <input
-                        id="lastName"
-                        name="lastName"
-                        type="text"
-                        onChange={formik.handleChange}
-                        onBlur={formik.handleBlur}
-                        value={formik.values.lastName}
-                    />
+                    <Label htmlFor="email">Email Address</Label>
                 </div>
-                <div>
-                    {formik.touched.lastName && formik.errors.lastName ? (
-                        <div>{formik.errors.lastName}</div>
-                    ) : null}
-                </div>
-                <div>
-                    <label htmlFor="email">Email Address</label>
-                    <input
-                        id="email"
-                        name="email"
-                        type="email"
-                        onChange={formik.handleChange}
-                        onBlur={formik.handleBlur}
-                        value={formik.values.email}
-                    />
-                </div>
-                <div>
-                    {formik.touched.email && formik.errors.email ? (
-                        <div>{formik.errors.email}</div>
-                    ) : null}
-                </div>
-                <button type="submit">Submit</button>
-            </From>
+                <Input
+                    id="email"
+                    name="email"
+                    type="email"
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    value={formik.values.email}
+                />
+            </Div>
+            <Div>
+                {formik.touched.email && formik.errors.email ? (
+                    <ErrorLabel>{formik.errors.email}</ErrorLabel>
+                ) : null}
+            </Div>
+
+            <button type="submit">Submit</button>
+        </From>
     );
 };
